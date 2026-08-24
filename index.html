@@ -1,1 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deficiências Oculares - Veja o Mundo de Outra Perspectiva</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --text: #334155;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        }
 
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        nav .logo { font-weight: 800; font-size: 1.3rem; color: var(--primary); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 100px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -200px; right: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            bottom: -100px; left: -100px;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            animation: fadeUp 1s ease;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            animation: fadeUp 1s ease 0.2s backwards;
+        }
+        .hero .btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeUp 1s ease 0.4s backwards;
+        }
+        .hero .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SECTIONS */
+        section { padding: 80px 5%; }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* O QUE SÃO */
+        .about {
+            background: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-text h2 { font-size: 2.2rem; margin-bottom: 20px; color: var(--dark); }
+        .about-text p { margin-bottom: 15px; font-size: 1.05rem; }
+        .about-visual {
+            background: var(--gradient);
+            height: 400px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            box-shadow: 0 20px 60px rgba(99,102,241,0.3);
+            transition: transform 0.5s;
+        }
+        .about-visual:hover { transform: scale(1.05) rotate(-2deg); }
+
+        /* TIPOS - CARDS */
+        .types { background: var(--light); }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            transition: transform 0.4s, box-shadow 0.4s;
+            cursor: pointer;
+            border-top: 4px solid var(--primary);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99,102,241,0.15);
+        }
+        .card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .card h3 { font-size: 1.4rem; margin-bottom: 12px; color: var(--dark); }
+        .card p { color: #64748b; font-size: 0.98rem; }
+
+        /* SIMULADOR - A DINÂMICA PRINCIPAL */
+        .simulator {
+            background: var(--dark);
+            color: white;
+        }
+        .simulator .section-title, .simulator .section-subtitle { color: white; }
+        .simulator .section-subtitle { opacity: 0.8; }
+        
+        .sim-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .sim-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .sim-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid transparent;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .sim-btn:hover { background: rgba(255,255,255,0.2); }
+        .sim-btn.active {
+            background: var(--primary);
+            border-color: white;
+        }
+        
+        .sim-scene {
+            background: linear-gradient(180deg, #87ceeb 0%, #87ceeb 60%, #90ee90 60%, #228b22 100%);
+            height: 350px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: filter 0.6s;
+        }
+        .sim-scene .sun {
+            position: absolute;
+            width: 80px; height: 80px;
+            background: #ffd700;
+            border-radius: 50%;
+            top: 40px; right: 80px;
+            box-shadow: 0 0 60px #ffd700;
+        }
+        .sim-scene .house {
+            position: absolute;
+            bottom: 40px; left: 50%;
+            transform: translateX(-50%);
+            width: 150px; height: 120px;
+            background: #8b4513;
+        }
+        .sim-scene .house::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -15px;
+            width: 0; height: 0;
+            border-left: 90px solid transparent;
+            border-right: 90px solid transparent;
+            border-bottom: 60px solid #a0522d;
+        }
+        .sim-scene .tree {
+            position: absolute;
+            bottom: 40px; left: 60px;
+            width: 20px; height: 80px;
+            background: #654321;
+        }
+        .sim-scene .tree::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -25px;
+            width: 70px; height: 70px;
+            background: #228b22;
+            border-radius: 50%;
+        }
+        .sim-scene .text-demo {
+            position: absolute;
+            bottom: 20px; right: 30px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .sim-info {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(99,102,241,0.2);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+        .sim-info h4 { color: var(--secondary); margin-bottom: 8px; }
+
+        /* ESTATÍSTICAS */
+        .stats {
+            background: var(--gradient);
+            color: white;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            display: block;
+        }
+        .stat-label { font-size: 1.1rem; opacity: 0.95; }
+
+        /* QUIZ */
+        .quiz { background: white; }
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        .quiz-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+        .quiz-options { display: grid; gap: 12px; }
+        .quiz-option {
+            background: white;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-align: left;
+        }
+        .quiz-option:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+        .quiz-option.correct {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+        .quiz-option.wrong {
+            background: #ef4444;
+            color: white;
+            border-color: #ef4444;
+        }
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        .quiz-feedback.show { display: block; }
+        .quiz-next {
+            margin-top: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: none;
+        }
+        .quiz-next.show { display: inline-block; }
+        .quiz-score {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* DICAS */
+        .tips { background: var(--light); }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .tip {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .tip h4 { color: var(--dark); margin-bottom: 10px; }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        footer p { opacity: 0.8; margin-bottom: 10px; }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .about { grid-template-columns: 1fr; }
+            .about-visual { height: 250px; font-size: 6rem; }
+            .section-title { font-size: 2rem; }
+        }
+
+        /* ANIMAÇÃO DE ENTRADA */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">👁️ VisãoConsciente</div>
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#tipos">Tipos</a></li>
+            <li><a href="#simulador">Simulador</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Veja o Mundo de Outra Perspectiva</h1>
+            <p>Mais de 2 bilhões de pessoas vivem com algum tipo de deficiência visual. Vamos entender, respeitar e incluir?</p>
+            <a href="#sobre" class="btn">Começar a jornada →</a>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <div class="about reveal">
+            <div class="about-text">
+                <h2>O que são deficiências oculares?</h2>
+                <p>Deficiências oculares são condições que afetam parcial ou totalmente a capacidade de enxergar. Elas podem ser <strong>congênitas</strong> (desde o nascimento) ou <strong>adquiridas</strong> ao longo da vida.</p>
+                <p>Nem toda deficiência visual é cegueira total! Existem diferentes graus e tipos — como baixa visão, daltonismo, visão de túnel e outros — que afetam pessoas de formas únicas.</p>
+                <p>Com <strong>tecnologia assistiva</strong>, acessibilidade e empatia, é possível garantir inclusão e qualidade de vida para todos.</p>
+            </div>
+            <div class="about-visual">👁️</div>
+        </div>
+    </section>
+
+    <section id="tipos" class="types">
+        <h2 class="section-title reveal">Principais Tipos</h2>
+        <p class="section-subtitle reveal">Conheça as condições mais comuns que afetam a visão</p>
+        <div class="cards">
+            <div class="card reveal">
+                <span class="icon">⚫</span>
+                <h3>Cegueira Total</h3>
+                <p>Ausência completa da visão. A pessoa utiliza outros sentidos e tecnologias como braille e leitores de tela para navegar pelo mundo.</p>
+            </div>
+            <div class="card reveal">
+                <span class="icon">🔍</span>
+                <h3>Baixa Visão</h3>
+                <p>Redução significativa da capacidade visual que não pode ser totalmente corrigida com óculos. Requer adaptações e lupas.</p>
+            </div>
+            <div class="card reveal">
+                <span class="icon">🎨</span>
+                <h3>Daltonismo</h3>
+                <p>Dificuldade em distinguir certas cores, principalmente vermelho e verde. Afeta cerca de 8% dos homens e 0,5% das mulheres.</p>
+            </div>
+            <div class="card reveal">
+                <span class="icon">🌫️</span>
+                <h3>Catarata</h3>
+                <p>Opacificação do cristalino que causa visão embaçada. É a principal causa de cegueira reversível no mundo.</p>
+            </div>
+            <div class="card reveal">
+                <span class="icon">🔭</span>
+                <h3>Glaucoma</h3>
+                <p>Dano ao nervo óptico que reduz o campo visual progressivamente. Conhecido como "ladrão silencioso da visão".</p>
+            </div>
+            <div class="card reveal">
+                <span class="icon">🎯</span>
+                <h3>Visão de Túnel</h3>
+                <p>A pessoa enxerga apenas o que está à sua frente, perdendo a visão periférica. Como olhar através de um tubo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="simulador" class="simulator">
+        <h2 class="section-title reveal">🎮 Simulador Interativo</h2>
+        <p class="section-subtitle reveal">Clique nos botões e veja como diferentes condições afetam a visão</p>
+        <div class="sim-container reveal">
+            <div class="sim-buttons">
+                <button class="sim-btn active" data-filter="none">Visão Normal</button>
+                <button class="sim-btn" data-filter="catarata">Catarata</button>
+                <button class="sim-btn" data-filter="glaucoma">Glaucoma</button>
+                <button class="sim-btn" data-filter="daltonismo">Daltonismo</button>
+                <button class="sim-btn" data-filter="baixa">Baixa Visão</button>
+                <button class="sim-btn" data-filter="cegueira">Cegueira</button>
+            </div>
+            <div class="sim-scene" id="simScene">
+                <div class="sun"></div>
+                <div class="tree"></div>
+                <div class="house"></div>
+                <div class="text-demo">Texto de exemplo</div>
+            </div>
+            <div class="sim-info" id="simInfo">
+                <h4>Visão Normal</h4>
+                <p>É assim que a maioria das pessoas enxerga o mundo — com cores vibrantes, nitidez e campo visual completo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="reveal">
+                <span class="stat-number" data-target="2.2">0</span>
+                <span class="stat-label">bilhões de pessoas com deficiência visual no mundo</span>
+            </div>
+            <div class="reveal">
+                <span class="stat-number" data-target="80">0</span>
+                <span class="stat-label">% dos casos podem ser evitados ou tratados</span>
+            </div>
+            <div class="reveal">
+                <span class="stat-number" data-target="39">0</span>
+                <span class="stat-label">milhões de pessoas cegas no planeta</span>
+            </div>
+            <div class="reveal">
+                <span class="stat-number" data-target="6.5">0</span>
+                <span class="stat-label">milhões de brasileiros com deficiência visual</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="quiz">
+        <h2 class="section-title reveal">🧠 Teste seus Conhecimentos</h2>
+        <p class="section-subtitle reveal">Veja o quanto você aprendeu sobre deficiências oculares</p>
+        <div class="quiz-container reveal">
+            <div id="quizContent">
+                <div class="quiz-question" id="question"></div>
+                <div class="quiz-options" id="options"></div>
+                <div class="quiz-feedback" id="feedback"></div>
+                <button class="quiz-next" id="nextBtn">Próxima pergunta →</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="tips">
+        <h2 class="section-title reveal">💡 Como Ajudar e Incluir</h2>
+        <p class="section-subtitle reveal">Pequenas atitudes fazem uma grande diferença no dia a dia</p>
+        <div class="tips-grid">
+            <div class="tip reveal">
+                <h4>🗣️ Identifique-se</h4>
+                <p>Ao se aproximar de uma pessoa cega, sempre se apresente dizendo seu nome.</p>
+            </div>
+            <div class="tip reveal">
+                <h4>📱 Use descrições</h4>
+                <p>Em redes sociais, adicione texto alternativo (alt text) nas imagens.</p>
+            </div>
+            <div class="tip reveal">
+                <h4>🤝 Pergunte antes</h4>
+                <p>Antes de ajudar, pergunte se a pessoa precisa e como você pode ajudar.</p>
+            </div>
+            <div class="tip reveal">
+                <h4>🎯 Seja claro</h4>
+                <p>Use referências como "à sua esquerda" em vez de "aqui" ou "ali".</p>
+            </div>
+            <div class="tip reveal">
+                <h4>🐕 Respeite o cão-guia</h4>
+                <p>Nunca distraia ou alimente um cão-guia enquanto ele estiver trabalhando.</p>
+            </div>
+            <div class="tip reveal">
+                <h4>🌐 Sites acessíveis</h4>
+                <p>Se você desenvolve, garanta que seus sites tenham bom contraste e navegação por teclado.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>VisãoConsciente</strong> - Apresentação sobre Deficiências Oculares</p>
+        <p>Feito com ❤️ para promover empatia e inclusão</p>
+    </footer>
+
+    <script>
+        // ANIMAÇÃO DE SCROLL (REVEAL)
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => observer.observe(el));
+
+        // CONTADOR ANIMADO
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseFloat(el.dataset.target);
+                    const isDecimal = target % 1 !== 0;
+                    let current = 0;
+                    const increment = target / 60;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        el.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+                    }, 25);
+                    statsObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        statNumbers.forEach(el => statsObserver.observe(el));
+
+        // SIMULADOR
+        const simScene = document.getElementById('simScene');
+        const simInfo = document.getElementById('simInfo');
+        const simButtons = document.querySelectorAll('.sim-btn');
+
+        const simData = {
+            none: {
+                filter: 'none',
+                title: 'Visão Normal',
+                text: 'É assim que a maioria das pessoas enxerga o mundo — com cores vibrantes, nitidez e campo visual completo.'
+            },
+            catarata: {
+                filter: 'blur(3px) brightness(0.85) contrast(0.7) sepia(0.3)',
+                title: 'Catarata',
+                text: 'A visão fica embaçada, como se houvesse uma névoa. As cores parecem desbotadas e a luz causa ofuscamento.'
+            },
+            glaucoma: {
+                filter: 'none',
+                mask: 'radial-gradient(circle 80px at center, black 60%, transparent 100%)',
+                title: 'Glaucoma (Visão de Túnel)',
+                text: 'A visão periférica é perdida gradualmente. A pessoa enxerga apenas uma pequena área central, como por um tubo.'
+            },
+            daltonismo: {
+                filter: 'grayscale(0.5) sepia(0.8) hue-rotate(-30deg) saturate(0.7)',
+                title: 'Daltonismo',
+                text: 'Dificuldade em distinguir certas cores, principalmente vermelho e verde. O mundo parece mais amarelado/marrom.'
+            },
+            baixa: {
+                filter: 'blur(5px) brightness(0.7) contrast(0.8)',
+                title: 'Baixa Visão',
+                text: 'A visão é muito reduzida mesmo com óculos. Objetos e textos ficam muito borrados e difíceis de identificar.'
+            },
+            cegueira: {
+                filter: 'brightness(0)',
+                title: 'Cegueira Total',
+                text: 'Ausência completa de visão. A pessoa percebe o mundo através dos outros sentidos: audição, tato e olfato.'
+            }
+        };
+
+        simButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                simButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const type = btn.dataset.filter;
+                const data = simData[type];
+                simScene.style.filter = data.filter;
+                simScene.style.webkitMaskImage = data.mask || 'none';
+                simScene.style.maskImage = data.mask || 'none';
+                simInfo.innerHTML = `<h4>${data.title}</h4><p>${data.text}</p>`;
+            });
+        });
+
+        // QUIZ
+        const quizData = [
+            {
+                q: "Qual é a principal causa de cegueira reversível no mundo?",
+                options: ["Glaucoma", "Catarata", "Daltonismo", "Miopia"],
+                correct: 1,
+                feedback: "A catarata pode ser tratada com cirurgia, recuperando a visão na maioria dos casos!"
+            },
+            {
+                q: "O daltonismo afeta principalmente a distinção entre quais cores?",
+                options: ["Azul e amarelo", "Preto e branco", "Vermelho e verde", "Rosa e roxo"],
+                correct: 2,
+                feedback: "O tipo mais comum é o deuteranopia, que dificulta distinguir vermelho e verde."
+            },
+            {
+                q: "Qual animal é treinado para ajudar pessoas cegas?",
+                options: ["Gato", "Cavalo", "Cão-guia", "Papagaio"],
+                correct: 2,
+                feedback: "Os cães-guia são treinados para guiar pessoas cegas com segurança pelas ruas."
+            },
+            {
+                q: "Qual sistema de leitura e escrita é usado por pessoas cegas?",
+                options: ["Morse", "Braille", "Aurebesh", "Binário"],
+                correct: 1,
+                feedback: "O Braille usa combinações de 6 pontos em relevo para formar letras e números."
+            },
+            {
+                q: "Quantas pessoas no mundo têm algum tipo de deficiência visual?",
+                options: ["100 milhões", "500 milhões", "2,2 bilhões", "10 bilhões"],
+                correct: 2,
+                feedback: "Segundo a OMS, são mais de 2,2 bilhões de pessoas — quase 1/3 da população mundial!"
+            }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const feedbackEl = document.getElementById('feedback');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function loadQuestion() {
+            if (currentQ >= quizData.length) {
+                document.getElementById('quizContent').innerHTML = `
+                    <div class="quiz-score">🎉 Você acertou ${score} de ${quizData.length}!</div>
+                    <p style="text-align:center;margin-top:20px;">
+                        ${score === quizData.length ? 'Perfeito! Você é um expert!' : 
+                          score >= 3 ? 'Muito bem! Você aprendeu bastante!' : 
+                          'Continue aprendendo sobre o tema!'}
+                    </p>`;
+                return;
+            }
+            const q = quizData[currentQ];
+            questionEl.textContent = `${currentQ + 1}. ${q.q}`;
+            optionsEl.innerHTML = '';
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.textContent = opt;
+                btn.onclick = () => selectAnswer(i, btn);
+                optionsEl.appendChild(btn);
+            });
+            feedbackEl.classList.remove('show');
+            nextBtn.classList.remove('show');
+        }
+
+        function selectAnswer(i, btn) {
+            const q = quizData[currentQ];
+            const allOptions = document.querySelectorAll('.quiz-option');
+            allOptions.forEach(o => o.onclick = null);
+            if (i === q.correct) {
+                btn.classList.add('correct');
+                score++;
+                feedbackEl.style.background = '#d1fae5';
+                feedbackEl.style.color = '#065f46';
+                feedbackEl.innerHTML = `<strong>✅ Correto!</strong> ${q.feedback}`;
+            } else {
+                btn.classList.add('wrong');
+                allOptions[q.correct].classList.add('correct');
+                feedbackEl.style.background = '#fee2e2';
+                feedbackEl.style.color = '#991b1b';
+                feedbackEl.innerHTML = `<strong>❌ Ops!</strong> ${q.feedback}`;
+            }
+            feedbackEl.classList.add('show');
+            nextBtn.classList.add('show');
+        }
+
+        nextBtn.onclick = () => {
+            currentQ++;
+            loadQuestion();
+        };
+
+        loadQuestion();
+    </script>
+</body>
+</html>
