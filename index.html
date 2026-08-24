@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deficiências Oculares - Veja o Mundo de Outra Perspectiva</title>
+    <title>VisãoConsciente - Deficiências Oculares</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #f59e0b;
-            --dark: #1e293b;
+            --primary: #6d28d9;
+            --primary-light: #8b5cf6;
+            --primary-dark: #4c1d95;
+            --accent: #fbbf24;
+            --accent-dark: #d97706;
+            --dark: #0f172a;
+            --dark-2: #1e293b;
             --light: #f8fafc;
+            --gray: #64748b;
             --text: #334155;
-            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            --gradient-1: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 50%, #ec4899 100%);
+            --gradient-2: linear-gradient(135deg, #1e40af 0%, #6d28d9 100%);
+            --gradient-3: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-sm: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-md: 0 10px 40px rgba(0,0,0,0.12);
+            --shadow-lg: 0 20px 60px rgba(109,40,217,0.25);
         }
 
         html { scroll-behavior: smooth; }
         
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.7;
             color: var(--text);
             background: var(--light);
@@ -32,182 +46,518 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 5%;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.06);
+            transition: all 0.3s;
         }
-        nav .logo { font-weight: 800; font-size: 1.3rem; color: var(--primary); }
-        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        nav ul { display: flex; list-style: none; gap: 35px; }
         nav a {
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
             transition: color 0.3s;
         }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s;
+        }
         nav a:hover { color: var(--primary); }
+        nav a:hover::after { width: 100%; }
 
         /* HERO */
         .hero {
             min-height: 100vh;
-            background: var(--gradient);
+            background: var(--gradient-2);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            padding: 100px 20px 60px;
+            padding: 120px 20px 80px;
             position: relative;
             overflow: hidden;
         }
         .hero::before {
             content: '';
             position: absolute;
-            width: 500px; height: 500px;
-            background: rgba(255,255,255,0.1);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(251,191,36,0.3) 0%, transparent 70%);
             border-radius: 50%;
             top: -200px; right: -200px;
-            animation: float 8s ease-in-out infinite;
+            animation: float 10s ease-in-out infinite;
         }
         .hero::after {
             content: '';
             position: absolute;
-            width: 300px; height: 300px;
-            background: rgba(255,255,255,0.08);
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(236,72,153,0.3) 0%, transparent 70%);
             border-radius: 50%;
-            bottom: -100px; left: -100px;
-            animation: float 6s ease-in-out infinite reverse;
+            bottom: -150px; left: -150px;
+            animation: float 8s ease-in-out infinite reverse;
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-30px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(10deg); }
         }
-        .hero-content { position: relative; z-index: 2; max-width: 800px; }
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            margin-bottom: 20px;
+        
+        /* Partículas */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            animation: rise 15s infinite linear;
+        }
+        @keyframes rise {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
             animation: fadeUp 1s ease;
         }
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            animation: fadeUp 1s ease 0.1s backwards;
+        }
+        .hero h1 span {
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
+            font-size: 1.25rem;
+            margin-bottom: 40px;
             opacity: 0.95;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
             animation: fadeUp 1s ease 0.2s backwards;
         }
-        .hero .btn {
-            display: inline-block;
-            background: white;
-            color: var(--primary);
-            padding: 15px 40px;
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 1s ease 0.3s backwards;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 35px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 700;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeUp 1s ease 0.4s backwards;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
-        .hero .btn:hover {
-            transform: translateY(-3px);
+        .btn-primary {
+            background: white;
+            color: var(--primary);
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* SECTIONS */
-        section { padding: 80px 5%; }
+        section { padding: 100px 5%; position: relative; }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-tag {
+            display: inline-block;
+            background: var(--gradient-1);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
             margin-bottom: 15px;
             color: var(--dark);
+            letter-spacing: -1px;
+        }
+        .section-title span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .section-subtitle {
-            text-align: center;
-            color: #64748b;
+            color: var(--gray);
             font-size: 1.1rem;
-            margin-bottom: 60px;
             max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
         }
 
-        /* O QUE SÃO */
-        .about {
-            background: white;
+        /* SOBRE */
+        .about { background: white; }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        .about-text p { margin-bottom: 18px; font-size: 1.05rem; color: var(--text); }
+        .about-text strong { color: var(--primary); }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        .about-feature:hover { transform: translateX(5px); }
+        .about-feature .icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .about-feature h4 { font-size: 0.95rem; color: var(--dark); margin-bottom: 2px; }
+        .about-feature p { font-size: 0.85rem; color: var(--gray); margin: 0; }
+        
+        .about-visual {
+            position: relative;
+            height: 500px;
+            background: var(--gradient-1);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12rem;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        .about-visual::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .about-visual span {
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ANATOMIA DO OLHO */
+        .anatomy {
+            background: var(--light);
+        }
+        .anatomy-container {
+            max-width: 1100px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
         }
-        .about-text h2 { font-size: 2.2rem; margin-bottom: 20px; color: var(--dark); }
-        .about-text p { margin-bottom: 15px; font-size: 1.05rem; }
-        .about-visual {
-            background: var(--gradient);
-            height: 400px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10rem;
-            box-shadow: 0 20px 60px rgba(99,102,241,0.3);
-            transition: transform 0.5s;
+        .anatomy-visual {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            position: relative;
         }
-        .about-visual:hover { transform: scale(1.05) rotate(-2deg); }
+        .eye-diagram {
+            font-size: 15rem;
+            margin: 20px 0;
+            display: inline-block;
+            animation: blink 4s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+        .anatomy-parts {
+            display: grid;
+            gap: 15px;
+        }
+        .anatomy-part {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .anatomy-part:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-md);
+            border-left-color: var(--accent);
+        }
+        .anatomy-part h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .anatomy-part p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin: 0;
+        }
 
-        /* TIPOS - CARDS */
-        .types { background: var(--light); }
+        /* TIPOS */
+        .types { background: white; }
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
         .card {
             background: white;
-            padding: 35px 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
-            transition: transform 0.4s, box-shadow 0.4s;
-            cursor: pointer;
-            border-top: 4px solid var(--primary);
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
         }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+        .card:hover::before { transform: scaleX(1); }
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(99,102,241,0.15);
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
         }
         .card .icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            display: inline-block;
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            transition: transform 0.4s;
         }
-        .card h3 { font-size: 1.4rem; margin-bottom: 12px; color: var(--dark); }
-        .card p { color: #64748b; font-size: 0.98rem; }
+        .card:hover .icon { transform: rotate(-10deg) scale(1.1); }
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        .card p { color: var(--gray); font-size: 0.98rem; margin-bottom: 15px; }
+        .card .tag {
+            display: inline-block;
+            background: rgba(109,40,217,0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
 
-        /* SIMULADOR - A DINÂMICA PRINCIPAL */
-        .simulator {
+        /* CAUSAS */
+        .causes {
             background: var(--dark);
             color: white;
+            position: relative;
+            overflow: hidden;
         }
-        .simulator .section-title, .simulator .section-subtitle { color: white; }
-        .simulator .section-subtitle { opacity: 0.8; }
+        .causes::before {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(109,40,217,0.3) 0%, transparent 70%);
+            top: -200px; left: -200px;
+            border-radius: 50%;
+        }
+        .causes .section-title { color: white; }
+        .causes .section-subtitle { color: rgba(255,255,255,0.7); }
+        .causes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .cause-box {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+        .cause-box:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-5px);
+        }
+        .cause-box h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cause-box h3 .emoji {
+            width: 50px; height: 50px;
+            background: var(--gradient-3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .cause-box ul { list-style: none; }
+        .cause-box li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .cause-box li:last-child { border: none; }
+        .cause-box li::before {
+            content: '▸';
+            color: var(--accent);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .cause-box li strong { color: var(--accent); }
+
+        /* SIMULADOR */
+        .simulator {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+        }
+        .simulator .section-title { color: white; }
+        .simulator .section-subtitle { color: rgba(255,255,255,0.7); }
         
         .sim-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 30px;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px;
             border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
         }
         .sim-buttons {
             display: flex;
@@ -217,213 +567,608 @@
             margin-bottom: 30px;
         }
         .sim-btn {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             color: white;
             border: 2px solid transparent;
-            padding: 10px 20px;
+            padding: 12px 22px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
         }
-        .sim-btn:hover { background: rgba(255,255,255,0.2); }
+        .sim-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
         .sim-btn.active {
-            background: var(--primary);
+            background: var(--gradient-1);
             border-color: white;
+            box-shadow: 0 5px 20px rgba(109,40,217,0.5);
         }
         
         .sim-scene {
-            background: linear-gradient(180deg, #87ceeb 0%, #87ceeb 60%, #90ee90 60%, #228b22 100%);
-            height: 350px;
-            border-radius: 15px;
+            background: linear-gradient(180deg, #87ceeb 0%, #87ceeb 55%, #90ee90 55%, #228b22 100%);
+            height: 400px;
+            border-radius: 20px;
             position: relative;
             overflow: hidden;
-            transition: filter 0.6s;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.1);
         }
         .sim-scene .sun {
             position: absolute;
-            width: 80px; height: 80px;
-            background: #ffd700;
+            width: 90px; height: 90px;
+            background: radial-gradient(circle, #fff7b0 0%, #ffd700 70%);
             border-radius: 50%;
-            top: 40px; right: 80px;
-            box-shadow: 0 0 60px #ffd700;
+            top: 50px; right: 100px;
+            box-shadow: 0 0 80px #ffd700;
+        }
+        .sim-scene .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 50px;
+            opacity: 0.9;
+        }
+        .sim-scene .cloud-1 {
+            width: 100px; height: 30px;
+            top: 80px; left: 80px;
+            animation: drift 30s linear infinite;
+        }
+        .sim-scene .cloud-2 {
+            width: 130px; height: 35px;
+            top: 120px; left: 300px;
+            animation: drift 40s linear infinite;
+        }
+        @keyframes drift {
+            from { transform: translateX(-200px); }
+            to { transform: translateX(1000px); }
         }
         .sim-scene .house {
             position: absolute;
-            bottom: 40px; left: 50%;
+            bottom: 45px; left: 50%;
             transform: translateX(-50%);
-            width: 150px; height: 120px;
-            background: #8b4513;
+            width: 160px; height: 130px;
+            background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%);
+            border-radius: 5px;
         }
         .sim-scene .house::before {
             content: '';
             position: absolute;
-            top: -60px; left: -15px;
+            top: -70px; left: -20px;
             width: 0; height: 0;
-            border-left: 90px solid transparent;
-            border-right: 90px solid transparent;
-            border-bottom: 60px solid #a0522d;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 70px solid #654321;
         }
+        .sim-scene .house::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 35px; height: 55px;
+            background: #3d2817;
+            border-radius: 3px 3px 0 0;
+        }
+        .sim-scene .window {
+            position: absolute;
+            width: 30px; height: 30px;
+            background: #ffd700;
+            border: 3px solid #3d2817;
+            top: 30px;
+        }
+        .sim-scene .window-1 { left: 20px; }
+        .sim-scene .window-2 { right: 20px; }
         .sim-scene .tree {
             position: absolute;
-            bottom: 40px; left: 60px;
-            width: 20px; height: 80px;
-            background: #654321;
+            bottom: 45px; left: 80px;
+            width: 22px; height: 90px;
+            background: linear-gradient(90deg, #654321 0%, #8b4513 100%);
+            border-radius: 3px;
         }
         .sim-scene .tree::before {
             content: '';
             position: absolute;
-            top: -60px; left: -25px;
-            width: 70px; height: 70px;
-            background: #228b22;
+            top: -70px; left: -30px;
+            width: 80px; height: 80px;
+            background: radial-gradient(circle, #32cd32 0%, #228b22 100%);
+            border-radius: 50%;
+            box-shadow: 
+                -20px 10px 0 -10px #228b22,
+                20px 10px 0 -10px #228b22;
+        }
+        .sim-scene .flower {
+            position: absolute;
+            bottom: 55px;
+            width: 15px; height: 15px;
             border-radius: 50%;
         }
+        .sim-scene .flower-1 { left: 200px; background: #ff1493; }
+        .sim-scene .flower-2 { left: 250px; background: #ffd700; }
+        .sim-scene .flower-3 { right: 200px; background: #ff6347; }
         .sim-scene .text-demo {
             position: absolute;
             bottom: 20px; right: 30px;
             background: white;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 25px;
+            border-radius: 10px;
             color: #333;
-            font-weight: 600;
+            font-weight: 700;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
         
         .sim-info {
             margin-top: 25px;
-            padding: 20px;
-            background: rgba(99,102,241,0.2);
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
+            padding: 25px;
+            background: rgba(109,40,217,0.15);
+            border-radius: 15px;
+            border-left: 4px solid var(--accent);
         }
-        .sim-info h4 { color: var(--secondary); margin-bottom: 8px; }
+        .sim-info h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sim-info p { color: rgba(255,255,255,0.9); }
 
         /* ESTATÍSTICAS */
         .stats {
-            background: var(--gradient);
+            background: var(--gradient-1);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .stats::before {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
             margin: 0 auto;
             text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .stat {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 35px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s;
+        }
+        .stat:hover { transform: translateY(-10px); }
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
         }
         .stat-number {
             font-size: 3.5rem;
-            font-weight: 800;
+            font-weight: 900;
             display: block;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
         }
-        .stat-label { font-size: 1.1rem; opacity: 0.95; }
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        /* TECNOLOGIAS ASSISTIVAS */
+        .tech { background: white; }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tech-card {
+            background: var(--light);
+            padding: 35px 25px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--gradient-1);
+            transition: left 0.5s;
+            z-index: 0;
+        }
+        .tech-card:hover::before { left: 0; }
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        .tech-card:hover * { color: white !important; position: relative; z-index: 2; }
+        .tech-card > * { position: relative; z-index: 2; transition: color 0.3s; }
+        .tech-card .tech-icon {
+            width: 80px; height: 80px;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px;
+            transition: transform 0.4s;
+        }
+        .tech-card:hover .tech-icon { transform: rotate(360deg) scale(1.1); }
+        .tech-card h4 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .tech-card p { color: var(--gray); font-size: 0.95rem; }
+
+        /* LEIS */
+        .laws {
+            background: var(--light);
+        }
+        .laws-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        .laws-container::before {
+            content: '⚖️';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.05;
+            top: -30px; right: -30px;
+        }
+        .law-item {
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+        .law-item:last-child { border: none; }
+        .law-number {
+            width: 50px; height: 50px;
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .law-content h4 {
+            color: var(--dark);
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+        .law-content p { color: var(--gray); font-size: 0.95rem; }
+
+        /* MITOS E VERDADES */
+        .myths { background: white; }
+        .myths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .myth {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+        .myth:hover { transform: translateY(-5px); }
+        .myth-header {
+            padding: 20px 25px;
+            background: var(--gradient-1);
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .myth-header.mito { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .myth-header.verdade { background: linear-gradient(135deg, #10b981, #059669); }
+        .myth-body { padding: 25px; }
+        .myth-body p { color: var(--text); font-size: 0.95rem; }
 
         /* QUIZ */
-        .quiz { background: white; }
+        .quiz { background: var(--light); }
         .quiz-container {
-            max-width: 700px;
+            max-width: 750px;
             margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        .quiz-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: var(--gradient-1);
+        }
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        .quiz-progress-bar {
+            height: 6px;
             background: var(--light);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border-radius: 50px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .quiz-progress-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 50px;
+            transition: width 0.5s;
         }
         .quiz-question {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 600;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             color: var(--dark);
+            line-height: 1.4;
         }
         .quiz-options { display: grid; gap: 12px; }
         .quiz-option {
-            background: white;
-            padding: 15px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
+            background: var(--light);
+            padding: 18px 22px;
+            border: 2px solid transparent;
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s;
             font-size: 1rem;
             text-align: left;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .quiz-option .letter {
+            width: 35px; height: 35px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            flex-shrink: 0;
+            transition: all 0.3s;
         }
         .quiz-option:hover {
             border-color: var(--primary);
             transform: translateX(5px);
         }
-        .quiz-option.correct {
-            background: #10b981;
+        .quiz-option:hover .letter {
+            background: var(--primary);
             color: white;
+        }
+        .quiz-option.correct {
+            background: #d1fae5;
             border-color: #10b981;
         }
-        .quiz-option.wrong {
-            background: #ef4444;
+        .quiz-option.correct .letter {
+            background: #10b981;
             color: white;
+        }
+        .quiz-option.wrong {
+            background: #fee2e2;
             border-color: #ef4444;
         }
+        .quiz-option.wrong .letter {
+            background: #ef4444;
+            color: white;
+        }
         .quiz-feedback {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
             display: none;
+            font-size: 0.95rem;
         }
         .quiz-feedback.show { display: block; }
         .quiz-next {
-            margin-top: 20px;
-            background: var(--primary);
+            margin-top: 25px;
+            background: var(--gradient-1);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 35px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1rem;
             display: none;
+            font-family: 'Poppins', sans-serif;
+            transition: transform 0.3s;
         }
         .quiz-next.show { display: inline-block; }
+        .quiz-next:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
         .quiz-score {
             text-align: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            padding: 20px;
+        }
+        .quiz-score .big {
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
         }
 
         /* DICAS */
-        .tips { background: var(--light); }
+        .tips { background: white; }
         .tips-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         .tip {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 4px solid var(--secondary);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            background: var(--light);
+            padding: 30px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .tip h4 { color: var(--dark); margin-bottom: 10px; }
+        .tip::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: var(--gradient-1);
+        }
+        .tip:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+        .tip-icon {
+            width: 55px; height: 55px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .tip h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .tip p { color: var(--gray); font-size: 0.95rem; }
+
+        /* REFERÊNCIAS */
+        .references {
+            background: var(--light);
+        }
+        .references-list {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        .references-list h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        .references-list ul {
+            list-style: none;
+        }
+        .references-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            color: var(--text);
+            font-size: 0.95rem;
+            display: flex;
+            gap: 10px;
+        }
+        .references-list li::before {
+            content: '📚';
+            flex-shrink: 0;
+        }
+        .references-list li:last-child { border: none; }
+        .references-list a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .references-list a:hover { text-decoration: underline; }
 
         /* FOOTER */
         footer {
             background: var(--dark);
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px 30px;
+            position: relative;
+            overflow: hidden;
         }
-        footer p { opacity: 0.8; margin-bottom: 10px; }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: var(--gradient-1);
+        }
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        footer p { opacity: 0.7; margin-bottom: 8px; font-size: 0.95rem; }
+        footer .heart { color: #ef4444; }
 
         /* RESPONSIVO */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             nav ul { display: none; }
-            .about { grid-template-columns: 1fr; }
-            .about-visual { height: 250px; font-size: 6rem; }
+            .about-grid, .anatomy-container, .causes-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-visual { height: 350px; font-size: 8rem; }
             .section-title { font-size: 2rem; }
+            section { padding: 70px 5%; }
+            .laws-container { padding: 30px; }
+            .quiz-container { padding: 30px; }
         }
 
         /* ANIMAÇÃO DE ENTRADA */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .reveal.active {
             opacity: 1;
@@ -437,120 +1182,452 @@
         <div class="logo">👁️ VisãoConsciente</div>
         <ul>
             <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#anatomia">Anatomia</a></li>
             <li><a href="#tipos">Tipos</a></li>
             <li><a href="#simulador">Simulador</a></li>
             <li><a href="#quiz">Quiz</a></li>
         </ul>
     </nav>
 
+    <!-- HERO -->
     <section class="hero">
+        <div class="particles" id="particles"></div>
         <div class="hero-content">
-            <h1>Veja o Mundo de Outra Perspectiva</h1>
-            <p>Mais de 2 bilhões de pessoas vivem com algum tipo de deficiência visual. Vamos entender, respeitar e incluir?</p>
-            <a href="#sobre" class="btn">Começar a jornada →</a>
-        </div>
-    </section>
-
-    <section id="sobre">
-        <div class="about reveal">
-            <div class="about-text">
-                <h2>O que são deficiências oculares?</h2>
-                <p>Deficiências oculares são condições que afetam parcial ou totalmente a capacidade de enxergar. Elas podem ser <strong>congênitas</strong> (desde o nascimento) ou <strong>adquiridas</strong> ao longo da vida.</p>
-                <p>Nem toda deficiência visual é cegueira total! Existem diferentes graus e tipos — como baixa visão, daltonismo, visão de túnel e outros — que afetam pessoas de formas únicas.</p>
-                <p>Com <strong>tecnologia assistiva</strong>, acessibilidade e empatia, é possível garantir inclusão e qualidade de vida para todos.</p>
+            <div class="hero-badge">✨ Apresentação Interativa sobre Inclusão</div>
+            <h1>Veja o mundo por <span>outra perspectiva</span></h1>
+            <p>Mais de <strong>2,2 bilhões</strong> de pessoas vivem com algum tipo de deficiência visual no mundo. Vamos entender, respeitar e construir uma sociedade mais inclusiva?</p>
+            <div class="hero-buttons">
+                <a href="#sobre" class="btn btn-primary">Começar a jornada →</a>
+                <a href="#simulador" class="btn btn-outline">🎮 Testar simulador</a>
             </div>
-            <div class="about-visual">👁️</div>
         </div>
     </section>
 
+    <!-- SOBRE -->
+    <section id="sobre" class="about">
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <span class="section-tag">Introdução</span>
+                <h2>O que são deficiências oculares?</h2>
+                <p>Deficiências oculares são condições que afetam <strong>parcial ou totalmente</strong> a capacidade de enxergar. Elas podem ser <strong>congênitas</strong> (presentes desde o nascimento) ou <strong>adquiridas</strong> ao longo da vida por doenças, acidentes ou envelhecimento.</p>
+                <p>Importante: <strong>nem toda deficiência visual é cegueira total!</strong> Existem diferentes graus e tipos — como baixa visão, daltonismo, visão de túnel, catarata, glaucoma e outros — que afetam as pessoas de formas únicas.</p>
+                <p>Com <strong>tecnologia assistiva</strong>, acessibilidade e empatia, é possível garantir inclusão real e qualidade de vida para todos.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="icon">🌍</div>
+                        <div>
+                            <h4>Global</h4>
+                            <p>Afeta 1 em cada 4 pessoas</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="icon">💡</div>
+                        <div>
+                            <h4>Prevenível</h4>
+                            <p>80% dos casos são tratáveis</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="icon">🤝</div>
+                        <div>
+                            <h4>Inclusão</h4>
+                            <p>Direito garantido por lei</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="icon">🚀</div>
+                        <div>
+                            <h4>Tecnologia</h4>
+                            <p>Recursos que transformam vidas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual reveal">
+                <span>👁️</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANATOMIA -->
+    <section id="anatomia" class="anatomy">
+        <div class="section-header">
+            <span class="section-tag">Conhecimento</span>
+            <h2 class="section-title">Anatomia do <span>Olho Humano</span></h2>
+            <p class="section-subtitle">Entender como enxergamos é o primeiro passo para compreender as deficiências visuais</p>
+        </div>
+        <div class="anatomy-container">
+            <div class="anatomy-visual reveal">
+                <div class="eye-diagram">👁️</div>
+                <p style="color: var(--gray); font-size: 0.9rem;">O olho é um órgão complexo com mais de 2 milhões de partes trabalhando juntas</p>
+            </div>
+            <div class="anatomy-parts reveal">
+                <div class="anatomy-part">
+                    <h4>🔵 Córnea</h4>
+                    <p>Camada transparente na frente do olho que ajuda a focalizar a luz. Pode ser afetada por infecções e lesões.</p>
+                </div>
+                <div class="anatomy-part">
+                    <h4>🟣 Íris e Pupila</h4>
+                    <p>A íris é a parte colorida; a pupila controla a quantidade de luz que entra. O glaucoma afeta essa região.</p>
+                </div>
+                <div class="anatomy-part">
+                    <h4>🟡 Cristalino</h4>
+                    <p>Lente natural que focaliza a imagem. Quando fica opaco, causa a <strong>catarata</strong>.</p>
+                </div>
+                <div class="anatomy-part">
+                    <h4>🔴 Retina</h4>
+                    <p>Camada sensível à luz no fundo do olho. Converte luz em sinais nervosos. Afetada pela <strong>retinopatia diabética</strong>.</p>
+                </div>
+                <div class="anatomy-part">
+                    <h4>🟢 Nervo Óptico</h4>
+                    <p>Leva as informações visuais ao cérebro. Danos causam <strong>glaucoma</strong> e perda progressiva da visão.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIPOS -->
     <section id="tipos" class="types">
-        <h2 class="section-title reveal">Principais Tipos</h2>
-        <p class="section-subtitle reveal">Conheça as condições mais comuns que afetam a visão</p>
+        <div class="section-header">
+            <span class="section-tag">Classificação</span>
+            <h2 class="section-title">Principais <span>Tipos</span></h2>
+            <p class="section-subtitle">Conheça as condições mais comuns que afetam a visão no mundo</p>
+        </div>
         <div class="cards">
             <div class="card reveal">
-                <span class="icon">⚫</span>
+                <div class="icon">⚫</div>
                 <h3>Cegueira Total</h3>
-                <p>Ausência completa da visão. A pessoa utiliza outros sentidos e tecnologias como braille e leitores de tela para navegar pelo mundo.</p>
+                <p>Ausência completa da visão. A pessoa utiliza outros sentidos e tecnologias como braille, leitores de tela e bengala para navegar pelo mundo.</p>
+                <span class="tag">39 milhões no mundo</span>
             </div>
             <div class="card reveal">
-                <span class="icon">🔍</span>
+                <div class="icon">🔍</div>
                 <h3>Baixa Visão</h3>
-                <p>Redução significativa da capacidade visual que não pode ser totalmente corrigida com óculos. Requer adaptações e lupas.</p>
+                <p>Redução significativa da capacidade visual que não pode ser totalmente corrigida com óculos comuns. Requer lupas, ampliadores e adaptações.</p>
+                <span class="tag">253 milhões no mundo</span>
             </div>
             <div class="card reveal">
-                <span class="icon">🎨</span>
+                <div class="icon">🎨</div>
                 <h3>Daltonismo</h3>
-                <p>Dificuldade em distinguir certas cores, principalmente vermelho e verde. Afeta cerca de 8% dos homens e 0,5% das mulheres.</p>
+                <p>Dificuldade em distinguir certas cores, principalmente vermelho e verde. Condição genética que afeta cerca de 8% dos homens e 0,5% das mulheres.</p>
+                <span class="tag">Genético / Hereditário</span>
             </div>
             <div class="card reveal">
-                <span class="icon">🌫️</span>
+                <div class="icon">🌫️</div>
                 <h3>Catarata</h3>
-                <p>Opacificação do cristalino que causa visão embaçada. É a principal causa de cegueira reversível no mundo.</p>
+                <p>Opacificação do cristalino que causa visão embaçada, como se houvesse uma névoa. É a principal causa de cegueira <strong>reversível</strong> no mundo.</p>
+                <span class="tag">Tratável com cirurgia</span>
             </div>
             <div class="card reveal">
-                <span class="icon">🔭</span>
+                <div class="icon">🔭</div>
                 <h3>Glaucoma</h3>
-                <p>Dano ao nervo óptico que reduz o campo visual progressivamente. Conhecido como "ladrão silencioso da visão".</p>
+                <p>Dano ao nervo óptico causado geralmente por pressão alta no olho. Reduz o campo visual progressivamente. Conhecido como "ladrão silencioso da visão".</p>
+                <span class="tag">Irreversível / Prevenível</span>
             </div>
             <div class="card reveal">
-                <span class="icon">🎯</span>
+                <div class="icon">🎯</div>
                 <h3>Visão de Túnel</h3>
-                <p>A pessoa enxerga apenas o que está à sua frente, perdendo a visão periférica. Como olhar através de um tubo.</p>
+                <p>A pessoa enxerga apenas o que está à sua frente, perdendo a visão periférica. Como olhar através de um tubo estreito. Causa acidentes frequentes.</p>
+                <span class="tag">Perda periférica</span>
+            </div>
+            <div class="card reveal">
+                <div class="icon">💧</div>
+                <h3>Retinopatia Diabética</h3>
+                <p>Complicação do diabetes que danifica os vasos sanguíneos da retina. Principal causa de cegueira em adultos em idade produtiva.</p>
+                <span class="tag">Prevenível com controle</span>
+            </div>
+            <div class="card reveal">
+                <div class="icon">👶</div>
+                <h3>Retinopatia da Prematuridade</h3>
+                <p>Afeta bebês prematuros devido ao desenvolvimento anormal dos vasos sanguíneos da retina. Pode levar à cegueira permanente se não tratada.</p>
+                <span class="tag">Congênita</span>
+            </div>
+            <div class="card reveal">
+                <div class="icon">🌑</div>
+                <h3>Degeneração Macular</h3>
+                <p>Perda da visão central, comum em idosos (DMID). Afeta a capacidade de ler, reconhecer rostos e dirigir. Não afeta a visão periférica.</p>
+                <span class="tag">Relacionada à idade</span>
             </div>
         </div>
     </section>
 
+    <!-- CAUSAS -->
+    <section class="causes">
+        <div class="section-header">
+            <span class="section-tag">Origens</span>
+            <h2 class="section-title">O que causa as <span style="background: var(--gradient-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">deficiências?</span></h2>
+            <p class="section-subtitle">As causas podem ser divididas em dois grandes grupos</p>
+        </div>
+        <div class="causes-grid">
+            <div class="cause-box reveal">
+                <h3><span class="emoji">🧬</span> Causas Congênitas</h3>
+                <ul>
+                    <li><strong>Genética:</strong> daltonismo, retinose pigmentar, catarata congênita</li>
+                    <li><strong>Infecções na gravidez:</strong> rubéola, toxoplasmose, Zika vírus</li>
+                    <li><strong>Prematuridade:</strong> retinopatia da prematuridade</li>
+                    <li><strong>Má formação:</strong> anoftalmia ou microftalmia</li>
+                    <li><strong>Síndromes:</strong> Down, Sturge-Weber, CHARGE</li>
+                </ul>
+            </div>
+            <div class="cause-box reveal">
+                <h3><span class="emoji">⚡</span> Causas Adquiridas</h3>
+                <ul>
+                    <li><strong>Doenças crônicas:</strong> diabetes, hipertensão</li>
+                    <li><strong>Envelhecimento:</strong> catarata, degeneração macular</li>
+                    <li><strong>Acidentes:</strong> traumas oculares, queimaduras químicas</li>
+                    <li><strong>Infecções:</strong> tracoma, oncocercose</li>
+                    <li><strong>Estilo de vida:</strong> tabagismo, má alimentação, falta de proteção solar</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMULADOR -->
     <section id="simulador" class="simulator">
-        <h2 class="section-title reveal">🎮 Simulador Interativo</h2>
-        <p class="section-subtitle reveal">Clique nos botões e veja como diferentes condições afetam a visão</p>
+        <div class="section-header">
+            <span class="section-tag">🎮 Experiência</span>
+            <h2 class="section-title">Simulador <span>Interativo</span></h2>
+            <p class="section-subtitle">Clique nos botões e veja como diferentes condições afetam a visão</p>
+        </div>
         <div class="sim-container reveal">
             <div class="sim-buttons">
-                <button class="sim-btn active" data-filter="none">Visão Normal</button>
-                <button class="sim-btn" data-filter="catarata">Catarata</button>
-                <button class="sim-btn" data-filter="glaucoma">Glaucoma</button>
-                <button class="sim-btn" data-filter="daltonismo">Daltonismo</button>
-                <button class="sim-btn" data-filter="baixa">Baixa Visão</button>
-                <button class="sim-btn" data-filter="cegueira">Cegueira</button>
+                <button class="sim-btn active" data-filter="none">✨ Normal</button>
+                <button class="sim-btn" data-filter="catarata">🌫️ Catarata</button>
+                <button class="sim-btn" data-filter="glaucoma">🔭 Glaucoma</button>
+                <button class="sim-btn" data-filter="daltonismo">🎨 Daltonismo</button>
+                <button class="sim-btn" data-filter="baixa">🔍 Baixa Visão</button>
+                <button class="sim-btn" data-filter="dmid">🌑 Deg. Macular</button>
+                <button class="sim-btn" data-filter="cegueira">⚫ Cegueira</button>
             </div>
             <div class="sim-scene" id="simScene">
                 <div class="sun"></div>
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
                 <div class="tree"></div>
-                <div class="house"></div>
+                <div class="house">
+                    <div class="window window-1"></div>
+                    <div class="window window-2"></div>
+                </div>
+                <div class="flower flower-1"></div>
+                <div class="flower flower-2"></div>
+                <div class="flower flower-3"></div>
                 <div class="text-demo">Texto de exemplo</div>
             </div>
             <div class="sim-info" id="simInfo">
-                <h4>Visão Normal</h4>
-                <p>É assim que a maioria das pessoas enxerga o mundo — com cores vibrantes, nitidez e campo visual completo.</p>
+                <h4>✨ Visão Normal</h4>
+                <p>É assim que a maioria das pessoas enxerga o mundo — com cores vibrantes, nitidez, profundidade e campo visual completo.</p>
             </div>
         </div>
     </section>
 
+    <!-- ESTATÍSTICAS -->
     <section class="stats">
+        <div class="section-header">
+            <span class="section-tag" style="background: var(--gradient-3);">📊 Números</span>
+            <h2 class="section-title" style="color: white;">Um problema <span style="background: var(--gradient-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">global</span></h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Dados da Organização Mundial da Saúde (OMS) e do IBGE</p>
+        </div>
         <div class="stats-grid">
-            <div class="reveal">
+            <div class="stat reveal">
+                <div class="stat-icon">🌎</div>
                 <span class="stat-number" data-target="2.2">0</span>
                 <span class="stat-label">bilhões de pessoas com deficiência visual no mundo</span>
             </div>
-            <div class="reveal">
+            <div class="stat reveal">
+                <div class="stat-icon">💚</div>
                 <span class="stat-number" data-target="80">0</span>
                 <span class="stat-label">% dos casos podem ser evitados ou tratados</span>
             </div>
-            <div class="reveal">
+            <div class="stat reveal">
+                <div class="stat-icon">⚫</div>
                 <span class="stat-number" data-target="39">0</span>
                 <span class="stat-label">milhões de pessoas cegas no planeta</span>
             </div>
-            <div class="reveal">
+            <div class="stat reveal">
+                <div class="stat-icon">🇧🇷</div>
                 <span class="stat-number" data-target="6.5">0</span>
                 <span class="stat-label">milhões de brasileiros com deficiência visual</span>
+            </div>
+            <div class="stat reveal">
+                <div class="stat-icon">👶</div>
+                <span class="stat-number" data-target="19">0</span>
+                <span class="stat-label">milhões de crianças com deficiência visual</span>
+            </div>
+            <div class="stat reveal">
+                <div class="stat-icon">💰</div>
+                <span class="stat-number" data-target="411">0</span>
+                <span class="stat-label">bilhões de dólares em perda de produtividade/ano</span>
             </div>
         </div>
     </section>
 
+    <!-- TECNOLOGIAS -->
+    <section class="tech">
+        <div class="section-header">
+            <span class="section-tag">🚀 Inovação</span>
+            <h2 class="section-title">Tecnologias <span>Assistivas</span></h2>
+            <p class="section-subtitle">Ferramentas que transformam vidas e promovem autonomia</p>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-card reveal">
+                <div class="tech-icon">🔤</div>
+                <h4>Sistema Braille</h4>
+                <p>Criado em 1824 por Louis Braille, usa 63 combinações de 6 pontos em relevo para leitura e escrita. Revolucionou a educação de cegos.</p>
+            </div>
+            <div class="tech-card reveal">
+                <div class="tech-icon">🔊</div>
+                <h4>Leitores de Tela</h4>
+                <p>Programas como NVDA, JAWS e VoiceOver que leem em voz alta o conteúdo da tela do computador ou celular.</p>
+            </div>
+            <div class="tech-card reveal">
+                <div class="tech-icon">🦯</div>
+                <h4>Bengala Longa</h4>
+                <p>Instrumento de mobilidade que detecta obstáculos no chão e ajuda na orientação espacial. Símbolo universal da deficiência visual.</p>
+            </div>
+            <div class="tech-card reveal">
+                <div class="tech-icon">🐕</div>
+                <h4>Cão-Guia</h4>
+                <p>Cães treinados para guiar pessoas cegas com segurança. Ignoram distrações e desviam de obstáculos. Demoram 18 meses de treinamento.</p>
+            </div>
+            <div class="tech-card reveal">
+                <div class="tech-icon">🔎</div>
+                <h4>Lupas e Ampliadores</h4>
+                <p>Dispositivos ópticos e eletrônicos que ampliam textos e imagens para pessoas com baixa visão. Incluem apps de celular.</p>
+            </div>
+            <div class="tech-card reveal">
+                <div class="tech-icon">🎧</div>
+                <h4>Audiolivros e Podcasts</h4>
+                <p>Conteúdos em áudio que permitem acesso à literatura, notícias e educação. Plataformas como Audible e Audioteca expandem horizontes.</p>
+            </div>
+            <div class="tech-card reveal">
+                <div class="tech-icon">📱</div>
+                <h4>Apps Especializados</h4>
+                <p>Be My Eyes (ajuda voluntária), Seeing AI (reconhece cenas), Lazarus (amplia textos). A tecnologia móvel revolucionou a acessibilidade.</p>
+            </div>
+            <div class="tech-card reveal">
+                <div class="tech-icon">🥽</div>
+                <h4>Óculos Inteligentes</h4>
+                <p>Dispositivos como OrCam que leem textos em voz alta ou descrevem ambientes em tempo real usando IA e câmeras.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEIS -->
+    <section class="laws">
+        <div class="section-header">
+            <span class="section-tag">⚖️ Direitos</span>
+            <h2 class="section-title">Leis e <span>Garantias</span></h2>
+            <p class="section-subtitle">No Brasil, pessoas com deficiência visual têm direitos assegurados por lei</p>
+        </div>
+        <div class="laws-container reveal">
+            <div class="law-item">
+                <div class="law-number">1</div>
+                <div class="law-content">
+                    <h4>Constituição Federal de 1988</h4>
+                    <p>Garante a promoção da saúde, educação e inclusão de pessoas com deficiência, assegurando igualdade de direitos.</p>
+                </div>
+            </div>
+            <div class="law-item">
+                <div class="law-number">2</div>
+                <div class="law-content">
+                    <h4>Lei Brasileira de Inclusão (LBI) - Lei 13.146/2015</h4>
+                    <p>Marco legal que assegura direitos em educação, saúde, trabalho, mobilidade, cultura e acesso à justiça. Define acessibilidade como obrigação.</p>
+                </div>
+            </div>
+            <div class="law-item">
+                <div class="law-number">3</div>
+                <div class="law-content">
+                    <h4>Lei do BPC - Benefício de Prestação Continuada</h4>
+                    <p>Garante 1 salário mínimo mensal a pessoas com deficiência em famílias de baixa renda, independente de contribuição ao INSS.</p>
+                </div>
+            </div>
+            <div class="law-item">
+                <div class="law-number">4</div>
+                <div class="law-content">
+                    <h4>Lei de Cotas - Lei 8.213/1991</h4>
+                    <p>Empresas com 100+ funcionários devem reservar de 2% a 5% das vagas para pessoas com deficiência, incluindo deficiência visual.</p>
+                </div>
+            </div>
+            <div class="law-item">
+                <div class="law-number">5</div>
+                <div class="law-content">
+                    <h4>Lei do Passe Livre</h4>
+                    <p>Garante transporte interestadual gratuito para pessoas com deficiência de baixa renda. Válido em ônibus, trens e barcos.</p>
+                </div>
+            </div>
+            <div class="law-item">
+                <div class="law-number">6</div>
+                <div class="law-content">
+                    <h4>Lei de Acessibilidade Digital - Decreto 10.445/2020</h4>
+                    <p>Obriga sites e aplicativos do governo e de empresas privadas a seguirem padrões de acessibilidade (WCAG).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MITOS E VERDADES -->
+    <section class="myths">
+        <div class="section-header">
+            <span class="section-tag">💡 Desmistificando</span>
+            <h2 class="section-title">Mitos e <span>Verdades</span></h2>
+            <p class="section-subtitle">Vamos acabar com preconceitos e informações erradas</p>
+        </div>
+        <div class="myths-grid">
+            <div class="myth reveal">
+                <div class="myth-header mito">❌ MITO</div>
+                <div class="myth-body">
+                    <p><strong>"Pessoa cega vive no escuro."</strong><br>Nem toda cegueira é total. Muitas pessoas enxergam vultos, luzes ou têm visão residual. Além disso, cegueira total não significa "ver preto" — é ausência de percepção visual.</p>
+                </div>
+            </div>
+            <div class="myth reveal">
+                <div class="myth-header verdade">✅ VERDADE</div>
+                <div class="myth-body">
+                    <p><strong>"Outros sentidos podem se desenvolver mais."</strong><br>A audição, o tato e o olfato podem ficar mais apurados com o treino, mas não é um "superpoder" — é neuroplasticidade cerebral.</p>
+                </div>
+            </div>
+            <div class="myth reveal">
+                <div class="myth-header mito">❌ MITO</div>
+                <div class="myth-body">
+                    <p><strong>"Cego não pode trabalhar."</strong><br>Com as tecnologias certas, pessoas cegas trabalham em diversas áreas: programação, direito, medicina, música, ensino e muito mais.</p>
+                </div>
+            </div>
+            <div class="myth reveal">
+                <div class="myth-header verdade">✅ VERDADE</div>
+                <div class="myth-body">
+                    <p><strong>"Olhar nos olhos não é necessário."</strong><br>Pessoas cegas conversam normalmente olhando na direção da voz. O importante é a comunicação, não o contato visual.</p>
+                </div>
+            </div>
+            <div class="myth reveal">
+                <div class="myth-header mito">❌ MITO</div>
+                <div class="myth-body">
+                    <p><strong>"Cego não pode usar celular."</strong><br>Smartphones têm leitores de tela nativos (VoiceOver no iOS, TalkBack no Android) que permitem uso completo do aparelho.</p>
+                </div>
+            </div>
+            <div class="myth reveal">
+                <div class="myth-header verdade">✅ VERDADE</div>
+                <div class="myth-body">
+                    <p><strong>"Prevenção é possível na maioria dos casos."</strong><br>Consultas regulares ao oftalmologista, controle do diabetes e proteção solar previnem grande parte das deficiências visuais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ -->
     <section id="quiz" class="quiz">
-        <h2 class="section-title reveal">🧠 Teste seus Conhecimentos</h2>
-        <p class="section-subtitle reveal">Veja o quanto você aprendeu sobre deficiências oculares</p>
+        <div class="section-header">
+            <span class="section-tag">🧠 Desafio</span>
+            <h2 class="section-title">Teste seus <span>Conhecimentos</span></h2>
+            <p class="section-subtitle">Veja o quanto você aprendeu sobre deficiências oculares</p>
+        </div>
         <div class="quiz-container reveal">
             <div id="quizContent">
+                <div class="quiz-progress">
+                    <span id="progressText">Pergunta 1 de 8</span>
+                    <span id="scoreText">Pontos: 0</span>
+                </div>
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="progressFill" style="width: 12.5%"></div>
+                </div>
                 <div class="quiz-question" id="question"></div>
                 <div class="quiz-options" id="options"></div>
                 <div class="quiz-feedback" id="feedback"></div>
@@ -559,43 +1636,99 @@
         </div>
     </section>
 
+    <!-- DICAS -->
     <section class="tips">
-        <h2 class="section-title reveal">💡 Como Ajudar e Incluir</h2>
-        <p class="section-subtitle reveal">Pequenas atitudes fazem uma grande diferença no dia a dia</p>
+        <div class="section-header">
+            <span class="section-tag">💝 Empatia</span>
+            <h2 class="section-title">Como <span>Ajudar e Incluir</span></h2>
+            <p class="section-subtitle">Pequenas atitudes fazem uma grande diferença no dia a dia</p>
+        </div>
         <div class="tips-grid">
             <div class="tip reveal">
-                <h4>🗣️ Identifique-se</h4>
-                <p>Ao se aproximar de uma pessoa cega, sempre se apresente dizendo seu nome.</p>
+                <div class="tip-icon">🗣️</div>
+                <h4>Identifique-se</h4>
+                <p>Ao se aproximar de uma pessoa cega, sempre diga seu nome. Não assuma que ela vai te reconhecer pela voz.</p>
             </div>
             <div class="tip reveal">
-                <h4>📱 Use descrições</h4>
-                <p>Em redes sociais, adicione texto alternativo (alt text) nas imagens.</p>
+                <div class="tip-icon">📱</div>
+                <h4>Use descrições</h4>
+                <p>Em redes sociais, adicione texto alternativo (alt text) nas imagens. Isso permite que leitores de tela descrevam o conteúdo.</p>
             </div>
             <div class="tip reveal">
-                <h4>🤝 Pergunte antes</h4>
-                <p>Antes de ajudar, pergunte se a pessoa precisa e como você pode ajudar.</p>
+                <div class="tip-icon">🤝</div>
+                <h4>Pergunte antes</h4>
+                <p>Antes de ajudar, pergunte se a pessoa precisa e como você pode ajudar. Não imponha ajuda sem consentimento.</p>
             </div>
             <div class="tip reveal">
-                <h4>🎯 Seja claro</h4>
-                <p>Use referências como "à sua esquerda" em vez de "aqui" ou "ali".</p>
+                <div class="tip-icon">🎯</div>
+                <h4>Seja claro</h4>
+                <p>Use referências como "à sua esquerda" ou "a 2 metros à frente". Evite "aqui" ou "ali" sem contexto.</p>
             </div>
             <div class="tip reveal">
-                <h4>🐕 Respeite o cão-guia</h4>
-                <p>Nunca distraia ou alimente um cão-guia enquanto ele estiver trabalhando.</p>
+                <div class="tip-icon">🐕</div>
+                <h4>Respeite o cão-guia</h4>
+                <p>Nunca distraia, alimente ou faça carinho em um cão-guia enquanto ele estiver trabalhando. Ele está em serviço!</p>
             </div>
             <div class="tip reveal">
-                <h4>🌐 Sites acessíveis</h4>
-                <p>Se você desenvolve, garanta que seus sites tenham bom contraste e navegação por teclado.</p>
+                <div class="tip-icon">🌐</div>
+                <h4>Sites acessíveis</h4>
+                <p>Se você desenvolve, garanta que seus sites tenham bom contraste, navegação por teclado e textos alternativos.</p>
+            </div>
+            <div class="tip reveal">
+                <div class="tip-icon">🚶</div>
+                <h4>Ofereça o braço</h4>
+                <p>Para guiar, ofereça seu cotovelo. A pessoa segura seu braço e você anda meio passo à frente. Nunca puxe a pessoa.</p>
+            </div>
+            <div class="tip reveal">
+                <div class="tip-icon">🪑</div>
+                <h4>Organize o ambiente</h4>
+                <p>Não mude móveis de lugar sem avisar. Objetos fora do lugar podem causar acidentes para pessoas cegas.</p>
             </div>
         </div>
     </section>
 
+    <!-- REFERÊNCIAS -->
+    <section class="references">
+        <div class="section-header">
+            <span class="section-tag">📖 Fontes</span>
+            <h2 class="section-title">Referências <span>Bibliográficas</span></h2>
+        </div>
+        <div class="references-list reveal">
+            <h3>Fontes consultadas para esta apresentação:</h3>
+            <ul>
+                <li>Organização Mundial da Saúde (OMS). <em>World Report on Vision</em>. Genebra: OMS, 2019.</li>
+                <li>IBGE - Instituto Brasileiro de Geografia e Estatística. <em>Censo Demográfico 2022</em>. Rio de Janeiro: IBGE, 2023.</li>
+                <li>Brasil. <em>Lei nº 13.146, de 6 de julho de 2015</em>. Lei Brasileira de Inclusão da Pessoa com Deficiência.</li>
+                <li>Conselho Brasileiro de Oftalmologia (CBO). <em>Dados sobre cegueira no Brasil</em>. Disponível em: cbo.net.br</li>
+                <li>Fundação Dorina Nowill para Cegos. <em>Materiais educativos sobre deficiência visual</em>. São Paulo: FDNN.</li>
+                <li>Sociedade Brasileira de Diabetes. <em>Retinopatia Diabética: Diretrizes</em>. São Paulo: SBD, 2023.</li>
+                <li>UNICEF. <em>Crianças com deficiência visual: inclusão e direitos</em>. Nova York: UNICEF, 2022.</li>
+            </ul>
+        </div>
+    </section>
+
     <footer>
-        <p><strong>VisãoConsciente</strong> - Apresentação sobre Deficiências Oculares</p>
-        <p>Feito com ❤️ para promover empatia e inclusão</p>
+        <div class="footer-logo">👁️ VisãoConsciente</div>
+        <p>Apresentação sobre Deficiências Oculares</p>
+        <p>Feito com <span class="heart">❤️</span> para promover empatia e inclusão</p>
+        <p style="margin-top: 20px; font-size: 0.85rem;">© 2026 - Hospedado no GitHub Pages</p>
     </footer>
 
     <script>
+        // PARTÍCULAS DO HERO
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 6 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
         // ANIMAÇÃO DE SCROLL (REVEAL)
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
@@ -604,7 +1737,7 @@
                     entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
         reveals.forEach(el => observer.observe(el));
 
         // CONTADOR ANIMADO
@@ -639,34 +1772,45 @@
         const simData = {
             none: {
                 filter: 'none',
-                title: 'Visão Normal',
-                text: 'É assim que a maioria das pessoas enxerga o mundo — com cores vibrantes, nitidez e campo visual completo.'
+                mask: 'none',
+                title: '✨ Visão Normal',
+                text: 'É assim que a maioria das pessoas enxerga o mundo — com cores vibrantes, nitidez, profundidade e campo visual completo.'
             },
             catarata: {
-                filter: 'blur(3px) brightness(0.85) contrast(0.7) sepia(0.3)',
-                title: 'Catarata',
-                text: 'A visão fica embaçada, como se houvesse uma névoa. As cores parecem desbotadas e a luz causa ofuscamento.'
+                filter: 'blur(3px) brightness(0.85) contrast(0.7) sepia(0.3) saturate(0.8)',
+                mask: 'none',
+                title: '🌫️ Catarata',
+                text: 'A visão fica embaçada, como se houvesse uma névoa ou vidro sujo. As cores parecem desbotadas/amareladas e a luz causa ofuscamento intenso. É reversível com cirurgia!'
             },
             glaucoma: {
                 filter: 'none',
-                mask: 'radial-gradient(circle 80px at center, black 60%, transparent 100%)',
-                title: 'Glaucoma (Visão de Túnel)',
-                text: 'A visão periférica é perdida gradualmente. A pessoa enxerga apenas uma pequena área central, como por um tubo.'
+                mask: 'radial-gradient(circle 100px at center, black 50%, transparent 100%)',
+                title: '🔭 Glaucoma (Visão de Túnel)',
+                text: 'A visão periférica é perdida gradualmente. A pessoa enxerga apenas uma pequena área central, como por um tubo. É irreversível, mas pode ser controlada com tratamento.'
             },
             daltonismo: {
-                filter: 'grayscale(0.5) sepia(0.8) hue-rotate(-30deg) saturate(0.7)',
-                title: 'Daltonismo',
-                text: 'Dificuldade em distinguir certas cores, principalmente vermelho e verde. O mundo parece mais amarelado/marrom.'
+                filter: 'grayscale(0.4) sepia(0.7) hue-rotate(-30deg) saturate(0.7)',
+                mask: 'none',
+                title: '🎨 Daltonismo',
+                text: 'Dificuldade em distinguir certas cores, principalmente vermelho e verde. O mundo parece mais amarelado/marrom. É uma condição genética, não uma doença.'
             },
             baixa: {
-                filter: 'blur(5px) brightness(0.7) contrast(0.8)',
-                title: 'Baixa Visão',
-                text: 'A visão é muito reduzida mesmo com óculos. Objetos e textos ficam muito borrados e difíceis de identificar.'
+                filter: 'blur(6px) brightness(0.65) contrast(0.75)',
+                mask: 'none',
+                title: '🔍 Baixa Visão',
+                text: 'A visão é muito reduzida mesmo com óculos. Objetos e textos ficam muito borrados e difíceis de identificar. Requer lupas, ampliadores e adaptações no ambiente.'
+            },
+            dmid: {
+                filter: 'none',
+                mask: 'radial-gradient(circle 40px at center, transparent 30%, black 70%)',
+                title: '🌑 Degeneração Macular',
+                text: 'Perda da visão central (mancha escura no meio), mas a visão periférica é preservada. Dificulta leitura, reconhecimento de rostos e atividades de perto. Comum em idosos.'
             },
             cegueira: {
                 filter: 'brightness(0)',
-                title: 'Cegueira Total',
-                text: 'Ausência completa de visão. A pessoa percebe o mundo através dos outros sentidos: audição, tato e olfato.'
+                mask: 'none',
+                title: '⚫ Cegueira Total',
+                text: 'Ausência completa de visão. A pessoa percebe o mundo através dos outros sentidos: audição, tato e olfato. Com tecnologia e treinamento, leva uma vida plena e independente.'
             }
         };
 
@@ -677,8 +1821,8 @@
                 const type = btn.dataset.filter;
                 const data = simData[type];
                 simScene.style.filter = data.filter;
-                simScene.style.webkitMaskImage = data.mask || 'none';
-                simScene.style.maskImage = data.mask || 'none';
+                simScene.style.webkitMaskImage = data.mask;
+                simScene.style.maskImage = data.mask;
                 simInfo.innerHTML = `<h4>${data.title}</h4><p>${data.text}</p>`;
             });
         });
@@ -686,7 +1830,7 @@
         // QUIZ
         const quizData = [
             {
-                q: "Qual é a principal causa de cegueira reversível no mundo?",
+                q: "Qual é a principal causa de cegueira REVERSÍVEL no mundo?",
                 options: ["Glaucoma", "Catarata", "Daltonismo", "Miopia"],
                 correct: 1,
                 feedback: "A catarata pode ser tratada com cirurgia, recuperando a visão na maioria dos casos!"
@@ -695,25 +1839,48 @@
                 q: "O daltonismo afeta principalmente a distinção entre quais cores?",
                 options: ["Azul e amarelo", "Preto e branco", "Vermelho e verde", "Rosa e roxo"],
                 correct: 2,
-                feedback: "O tipo mais comum é o deuteranopia, que dificulta distinguir vermelho e verde."
+                feedback: "O tipo mais comum é a deuteranopia, que dificulta distinguir vermelho e verde."
             },
             {
-                q: "Qual animal é treinado para ajudar pessoas cegas?",
+                q: "Qual animal é treinado para ajudar pessoas cegas a se locomover?",
                 options: ["Gato", "Cavalo", "Cão-guia", "Papagaio"],
                 correct: 2,
-                feedback: "Os cães-guia são treinados para guiar pessoas cegas com segurança pelas ruas."
+                feedback: "Os cães-guia são treinados por 18 meses para guiar pessoas cegas com segurança."
             },
             {
-                q: "Qual sistema de leitura e escrita é usado por pessoas cegas?",
+                q: "Qual sistema de leitura e escrita em relevo é usado por pessoas cegas?",
                 options: ["Morse", "Braille", "Aurebesh", "Binário"],
                 correct: 1,
-                feedback: "O Braille usa combinações de 6 pontos em relevo para formar letras e números."
+                feedback: "O Braille foi criado em 1824 por Louis Braille e usa 63 combinações de 6 pontos."
             },
             {
-                q: "Quantas pessoas no mundo têm algum tipo de deficiência visual?",
+                q: "Quantas pessoas no mundo têm algum tipo de deficiência visual (OMS)?",
                 options: ["100 milhões", "500 milhões", "2,2 bilhões", "10 bilhões"],
                 correct: 2,
                 feedback: "Segundo a OMS, são mais de 2,2 bilhões de pessoas — quase 1/3 da população mundial!"
+            },
+            {
+                q: "Qual doença é conhecida como 'ladrão silencioso da visão'?",
+                options: ["Catarata", "Conjuntivite", "Glaucoma", "Terçol"],
+                correct: 2,
+                feedback: "O glaucoma danifica o nervo óptico gradualmente, sem sintomas iniciais. Por isso é 'silencioso'."
+            },
+            {
+                q: "Qual lei brasileira garante direitos às pessoas com deficiência?",
+                options: ["CLT", "LBI (Lei 13.146/2015)", "Código Civil", "Estatuto do Idoso"],
+                correct: 1,
+                feedback: "A Lei Brasileira de Inclusão (LBI) é o marco legal mais importante sobre o tema no Brasil."
+            },
+            {
+                q: "Qual a atitude CORRETA ao encontrar uma pessoa cega?",
+                options: [
+                    "Puxá-la pelo braço para ajudar",
+                    "Gritar para chamar atenção",
+                    "Identificar-se dizendo seu nome",
+                    "Ignorar para não incomodar"
+                ],
+                correct: 2,
+                feedback: "Sempre se apresente! A pessoa pode não te reconhecer pela voz. E pergunte antes de ajudar."
             }
         ];
 
@@ -723,25 +1890,38 @@
         const optionsEl = document.getElementById('options');
         const feedbackEl = document.getElementById('feedback');
         const nextBtn = document.getElementById('nextBtn');
+        const progressText = document.getElementById('progressText');
+        const scoreText = document.getElementById('scoreText');
+        const progressFill = document.getElementById('progressFill');
 
         function loadQuestion() {
             if (currentQ >= quizData.length) {
+                const percent = Math.round((score / quizData.length) * 100);
+                let message = '';
+                if (percent === 100) message = '🏆 Perfeito! Você é um expert no assunto!';
+                else if (percent >= 75) message = '🌟 Muito bem! Você aprendeu bastante!';
+                else if (percent >= 50) message = '👍 Bom trabalho! Continue aprendendo!';
+                else message = '📚 Que tal revisar o conteúdo?';
+                
                 document.getElementById('quizContent').innerHTML = `
-                    <div class="quiz-score">🎉 Você acertou ${score} de ${quizData.length}!</div>
-                    <p style="text-align:center;margin-top:20px;">
-                        ${score === quizData.length ? 'Perfeito! Você é um expert!' : 
-                          score >= 3 ? 'Muito bem! Você aprendeu bastante!' : 
-                          'Continue aprendendo sobre o tema!'}
-                    </p>`;
+                    <div class="quiz-score">
+                        <div class="big">${score}/${quizData.length}</div>
+                        <p style="font-size: 1.2rem; color: var(--gray); margin-top: 15px;">${message}</p>
+                        <p style="margin-top: 10px; color: var(--primary); font-weight: 600;">Você acertou ${percent}% das perguntas!</p>
+                    </div>`;
                 return;
             }
             const q = quizData[currentQ];
-            questionEl.textContent = `${currentQ + 1}. ${q.q}`;
+            progressText.textContent = `Pergunta ${currentQ + 1} de ${quizData.length}`;
+            scoreText.textContent = `Pontos: ${score}`;
+            progressFill.style.width = ((currentQ + 1) / quizData.length * 100) + '%';
+            questionEl.textContent = q.q;
             optionsEl.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
             q.options.forEach((opt, i) => {
                 const btn = document.createElement('button');
                 btn.className = 'quiz-option';
-                btn.textContent = opt;
+                btn.innerHTML = `<span class="letter">${letters[i]}</span><span>${opt}</span>`;
                 btn.onclick = () => selectAnswer(i, btn);
                 optionsEl.appendChild(btn);
             });
@@ -768,6 +1948,7 @@
             }
             feedbackEl.classList.add('show');
             nextBtn.classList.add('show');
+            nextBtn.textContent = currentQ === quizData.length - 1 ? 'Ver resultado 🎉' : 'Próxima pergunta →';
         }
 
         nextBtn.onclick = () => {
@@ -776,6 +1957,18 @@
         };
 
         loadQuestion();
+
+        // NAVBAR SCROLL
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '12px 5%';
+                nav.style.boxShadow = '0 5px 30px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.padding = '18px 5%';
+                nav.style.boxShadow = '0 2px 30px rgba(0,0,0,0.06)';
+            }
+        });
     </script>
 </body>
 </html>
